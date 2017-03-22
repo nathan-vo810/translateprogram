@@ -101,12 +101,6 @@ public class TranslateNumber {
 		try {
 			
 			performedTrans = dbObject.loadTrans();
-
-//			print all the numEng just loaded to test
-//			for (int i=0; i < performedTrans.size(); i++) {
-//				System.out.println(performedTrans.get(i).numEng);
-//			}
-
 			System.out.println("Load from file \"store.txt\" successfuly.");
 		} catch (IOException | ClassNotFoundException e) {
 			System.out.println("Errors occured during loading.");
