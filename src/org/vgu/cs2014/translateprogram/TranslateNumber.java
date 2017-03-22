@@ -23,10 +23,10 @@ public class TranslateNumber {
 		return result;
 	}
 
-	public static boolean autoTest(final String funcOut, final String actualOut) {
+	/*public static boolean autoTest(final String funcOut, final String actualOut) {
 		if (funcOut == actualOut) return true;
 		return false;
-	}
+	}*/
 
 	public static void testReport() {
 
@@ -46,8 +46,10 @@ public class TranslateNumber {
 		PerformedTranslation one = new PerformedTranslation(inputList[0],translate(inputList[0]));
 		performedTrans.add(one);
 
+		AutoTest testOb0 = new AutoTest();
+		
 		System.out.print(inputList[0]+"\tone\t\t"+ translate(inputList[0]));
-		if (!autoTest(translate(inputList[0]), "one")) {
+		if (!testOb0.autoTest(translate(inputList[0]), "one")) {
 			System.out.println("\tERROR");
 			flag = false;
 		} else System.out.println("\tTRUE");
@@ -57,8 +59,10 @@ public class TranslateNumber {
 		PerformedTranslation two = new PerformedTranslation(inputList[1],translate(inputList[1]));
 		performedTrans.add(two);
 
+		AutoTest testOb1 = new AutoTest();
+		
 		System.out.print(inputList[1]+"\ttwo\t\t"+ translate(inputList[1]));
-		if (!autoTest(translate(inputList[1]), "two")) {
+		if (!testOb1.autoTest(translate(inputList[1]), "two")) {
 			System.out.println("\tERROR");
 			flag = false;
 		} else System.out.println("\tTRUE");
@@ -66,8 +70,10 @@ public class TranslateNumber {
 		PerformedTranslation three = new PerformedTranslation(inputList[2],translate(inputList[2]));
 		performedTrans.add(three);
 
+		AutoTest testOb2 = new AutoTest();
+		
 		System.out.print(inputList[2]+"\tthre\t\t"+ translate(inputList[2]));
-		if (!autoTest(translate(inputList[2]), "thre")) {
+		if (!testOb2.autoTest(translate(inputList[2]), "thre")) {
 			System.out.println("\tERROR");
 			flag = false;
 		} else System.out.println("\tTRUE");
@@ -76,8 +82,10 @@ public class TranslateNumber {
 		PerformedTranslation error = new PerformedTranslation(inputList[3],translate(inputList[3]));
 		performedTrans.add(error);
 
+		AutoTest testOb3 = new AutoTest();
+		
 		System.out.print(inputList[3]+"\tnull\t\t"+ translate(inputList[3]));
-		if (!autoTest(translate(inputList[3]), null)) {
+		if (!testOb3.autoTest(translate(inputList[3]), null)) {
 			System.out.println("\tERROR");
 			flag = false;
 		} else System.out.println("\tTRUE");
@@ -116,4 +124,4 @@ public class TranslateNumber {
 			System.out.println("Errors occured during testing.");
 		}
 	}
-}
+}	
