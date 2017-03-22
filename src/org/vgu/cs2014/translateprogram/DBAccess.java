@@ -8,17 +8,19 @@ import java.io.ObjectOutputStream;
 
 public class DBAccess {
 	
-	private static DBAccess instance = null;
-	private DBAccess() {
+	private static DBAccess dbObject = null;
+	
+	private DBAccess () {
 		
 	}
 	
 	public static DBAccess getInstance() {
-		if (instance == null) {
-			instance = new DBAccess();
+		if (dbObject == null) {
+			dbObject = new DBAccess();
 		}
-		return instance;
+		return dbObject;
 	}
+	
 	
 	public void storeTrans (List<PerformedTranslation> performedTrans) throws IOException {
 		FileOutputStream fos = new FileOutputStream("store.txt");

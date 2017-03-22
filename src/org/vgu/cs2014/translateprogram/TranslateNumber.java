@@ -86,30 +86,32 @@ public class TranslateNumber {
 		if (flag) System.out.println("CONCLUSION: ALL TESTS PASSED");
 		else System.out.println("CONCLUSION: AT LEAST 1 TEST DIDNT PASS");
 
-
-		DBAccess dbObject = DBAccess.getInstance();
+		DBAccess db1 = DBAccess.getInstance();
 		
 		try {
-			dbObject.storeTrans(performedTrans);
-			System.out.println("Store to file \"store.txt\" successfuly.");
+			db1.storeTrans(performedTrans);
+			System.out.println("Store to file \"store.txt\" successfully.");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			// e.printStackTrace();
 			System.out.println("Errors occured during saving.");
 		}
-		
+
 		try {
-			
-			performedTrans = dbObject.loadTrans();
-			System.out.println("Load from file \"store.txt\" successfuly.");
+			performedTrans = db1.loadTrans();
+
+//			print all the numEng just loaded to test
+//			for (int i=0; i < performedTrans.size(); i++) {
+//				System.out.println(performedTrans.get(i).numEng);
+//			}
+
+			System.out.println("Load from file \"store.txt\" successfully.");
 		} catch (IOException | ClassNotFoundException e) {
 			System.out.println("Errors occured during loading.");
 		}
 
 		try {
-			if(TestFile.test())
-			System.out.println("Files OK.");
-			else System.out.println("File damaged.");
+			TestFile.test();
 		} catch (IOException e) {
 			System.out.println("Errors occured during testing.");
 		}
