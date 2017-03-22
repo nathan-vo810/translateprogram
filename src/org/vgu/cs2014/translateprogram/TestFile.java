@@ -7,33 +7,69 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TestFile {
-	public static boolean test() throws IOException, ClassNotFoundException{
+	public static void test() throws IOException, ClassNotFoundException{
 		boolean flag = true;
 
-		List<PerformedTranslation> storeList = new ArrayList<PerformedTranslation>();
+		List<PerformedTranslation> storedTrans = new ArrayList<PerformedTranslation>();
 		FileInputStream fis = new FileInputStream("store.txt");
 		ObjectInputStream ois = new ObjectInputStream(fis);
 
-		storeList =  (List<PerformedTranslation>) ois.readObject();
-//		for (int i=0; i < storeList.size(); i++) {
-//			System.out.println(storeList.get(i).numEng + "\t" +storeList.get(i).numGer);
-//		}
-
+		storedTrans =  (List<PerformedTranslation>) ois.readObject();
 
 		List<PerformedTranslation> performedTrans = new ArrayList<PerformedTranslation>();
 		performedTrans = DBAccess.loadTrans();
-//		for (int i=0; i < performedTrans.size(); i++) {
-//			System.out.println(performedTrans.get(i).numEng + "\t" + performedTrans.get(i).numGer);
-//		}
 
-//		System.out.println(storeList.size() + "\t" + performedTrans.size());
+		//First Test
 		for (int i=0; i < performedTrans.size(); i++) {
-			if(performedTrans.get(i).equals(storeList.get(i))) {
+			if(performedTrans.get(i).equals(storedTrans.get(i))) {
 				System.out.println(performedTrans.get(i).numEng + "\t" + performedTrans.get(i).numGer);
 				flag = false;
 			}
 		}
-		return flag;
+		System.out.println("Stored Translation List: ");
+		for (int i=0; i < storedTrans.size(); i++) {
+			System.out.println(storedTrans.get(i).numEng + "\t" +storedTrans.get(i).numGer);
+		}
+
+		System.out.println("Loaded Translation List: ");
+		for (int i=0; i < performedTrans.size(); i++) {
+			System.out.println(performedTrans.get(i).numEng + "\t" +performedTrans.get(i).numGer);
+		}
+
+		if(flag)
+			System.out.println("Result of 1st test: File OK.\n------------------------");
+		else System.out.println("Result of 1st test: File damaged.\n------------------------");
+
+		// Second Test
+		PerformedTranslation tmp = new PerformedTranslation("fünf", "five");
+		storedTrans.add(tmp);
+
+		// Report
+		System.out.println("Stored Translation List: ");
+		for (int i=0; i < storedTrans.size(); i++) {
+			System.out.println(storedTrans.get(i).numEng + "\t" +storedTrans.get(i).numGer);
+		}
+
+		System.out.println("Loaded Translation List: ");
+		for (int i=0; i < performedTrans.size(); i++) {
+			System.out.println(performedTrans.get(i).numEng + "\t" +performedTrans.get(i).numGer);
+		}
+
+		if(performedTrans.size() != storedTrans.size()){
+			flag = false;
+		}
+		else{
+			for (int i=0; i < performedTrans.size(); i++) {
+				if(performedTrans.get(i).equals(storedTrans.get(i))) {
+					System.out.println(performedTrans.get(i).numEng + "\t" + performedTrans.get(i).numGer);
+					flag = false;
+				}
+			}
+		}
+
+		if(flag)
+			System.out.println("Result of 2nd test: File OK.\n------------------------");
+		else System.out.println("Result of 2nd test: File damaged.\n------------------------");
 
 	}
 }
