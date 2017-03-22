@@ -87,17 +87,20 @@ public class TranslateNumber {
 		else System.out.println("CONCLUSION: AT LEAST 1 TEST DIDNT PASS");
 
 
+		DBAccess dbObject = DBAccess.getInstance();
+		
 		try {
-			DBAccess.storeTrans(performedTrans);
+			dbObject.storeTrans(performedTrans);
 			System.out.println("Store to file \"store.txt\" successfuly.");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			// e.printStackTrace();
 			System.out.println("Errors occured during saving.");
 		}
-
+		
 		try {
-			performedTrans = DBAccess.loadTrans();
+			
+			performedTrans = dbObject.loadTrans();
 
 //			print all the numEng just loaded to test
 //			for (int i=0; i < performedTrans.size(); i++) {

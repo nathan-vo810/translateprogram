@@ -21,7 +21,9 @@ public class TestFile {
 
 
 		List<PerformedTranslation> performedTrans = new ArrayList<PerformedTranslation>();
-		performedTrans = DBAccess.loadTrans();
+		
+		DBAccess dbOb = DBAccess.getInstance();
+		performedTrans = dbOb.loadTrans();
 //		for (int i=0; i < performedTrans.size(); i++) {
 //			System.out.println(performedTrans.get(i).numEng + "\t" + performedTrans.get(i).numGer);
 //		}

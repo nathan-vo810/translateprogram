@@ -7,7 +7,20 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 public class DBAccess {
-	public static void storeTrans (List<PerformedTranslation> performedTrans) throws IOException {
+	
+	private static DBAccess instance = null;
+	private DBAccess() {
+		
+	}
+	
+	public static DBAccess getInstance() {
+		if (instance == null) {
+			instance = new DBAccess();
+		}
+		return instance;
+	}
+	
+	public void storeTrans (List<PerformedTranslation> performedTrans) throws IOException {
 		FileOutputStream fos = new FileOutputStream("store.txt");
 		ObjectOutputStream oos = new ObjectOutputStream(fos);
 		oos.writeObject(performedTrans);
@@ -16,7 +29,7 @@ public class DBAccess {
 		
 		
 	}
-	public static List<PerformedTranslation> loadTrans () throws IOException, ClassNotFoundException {
+	public List<PerformedTranslation> loadTrans () throws IOException, ClassNotFoundException {
 		List<PerformedTranslation> myList = new ArrayList<PerformedTranslation>();
 		FileInputStream fis = new FileInputStream("store.txt");
 		ObjectInputStream ois = new ObjectInputStream(fis);
