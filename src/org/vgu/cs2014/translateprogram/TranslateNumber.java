@@ -110,7 +110,7 @@ public class TranslateNumber {
 		}
 
 		try {
-			if(TestFiles.test())
+			if(TestFile.test())
 			System.out.println("Files OK.");
 			else System.out.println("File damaged.");
 		} catch (IOException e) {
