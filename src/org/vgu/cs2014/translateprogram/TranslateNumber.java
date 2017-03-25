@@ -37,14 +37,14 @@ public class TranslateNumber {
 
 		String[] inputList = {"eins", "zwei", "drei", "unknown"};
 		List<PerformedTranslation> performedTrans = new ArrayList<PerformedTranslation>();
-
+		CustomList listObject = new CustomList(performedTrans);
 		boolean flag = true;
 
 		System.out.println("INPUT\tEXPECTED\tOUTPUT");
 		System.out.println("---------------------------------------");
 
 		PerformedTranslation one = new PerformedTranslation(inputList[0],translate(inputList[0]));
-		performedTrans.add(one);
+		listObject.add(one);
 
 		AutoTest testOb0 = new AutoTest();
 		
@@ -57,7 +57,7 @@ public class TranslateNumber {
 
 
 		PerformedTranslation two = new PerformedTranslation(inputList[1],translate(inputList[1]));
-		performedTrans.add(two);
+		listObject.add(two);
 
 		AutoTest testOb1 = new AutoTest();
 		
@@ -68,7 +68,7 @@ public class TranslateNumber {
 		} else System.out.println("\tTRUE");
 
 		PerformedTranslation three = new PerformedTranslation(inputList[2],translate(inputList[2]));
-		performedTrans.add(three);
+		listObject.add(three);
 
 		AutoTest testOb2 = new AutoTest();
 		
@@ -80,7 +80,7 @@ public class TranslateNumber {
 
 
 		PerformedTranslation error = new PerformedTranslation(inputList[3],translate(inputList[3]));
-		performedTrans.add(error);
+		listObject.add(error);
 
 		AutoTest testOb3 = new AutoTest();
 		
@@ -97,14 +97,14 @@ public class TranslateNumber {
 		DBAccess db1 = DBAccess.getInstance();
 		
 		try {
-			db1.storeTrans(performedTrans);
+			db1.storeTrans(listObject.getList());
 			System.out.println("Store to file \"store.txt\" successfully.");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			// e.printStackTrace();
-			System.out.println("Errors occured during saving.");
+			System.out.println("Error(s) occured during saving ne Khoa oi.");
 		}
-
+		
 		try {
 			performedTrans = db1.loadTrans();
 
@@ -115,13 +115,13 @@ public class TranslateNumber {
 
 			System.out.println("Load from file \"store.txt\" successfully.");
 		} catch (IOException | ClassNotFoundException e) {
-			System.out.println("Errors occured during loading.");
+			System.out.println("Error(s) occured during loading.");
 		}
 
 		try {
 			TestFile.test();
 		} catch (IOException e) {
-			System.out.println("Errors occured during testing.");
+			System.out.println("Error(s) occured during testing.");
 		}
 	}
 }	
